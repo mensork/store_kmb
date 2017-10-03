@@ -24,7 +24,7 @@ class Book < Product
   end
 
   def self.set_param(file_name)
-    array = File.readlines(file_name, 'r:UTF-8').map {|i| i.chomp}
+    array = File.readlines(file_name, encoding: 'UTF-8').map {|i| i.chomp}
 
     hash = {
       title: array[0],
