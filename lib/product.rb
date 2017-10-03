@@ -14,4 +14,18 @@ class Product
     @amount = params[:amount] if params[:amount]
   end
 
+  def self.from_file(file_name)
+    raise NotImplementedError
+  end
 end
+
+
+=begin
+  def self.types
+    [Book, Film]
+  end
+
+  def self.create(index)
+    types[index].new
+  end
+=end

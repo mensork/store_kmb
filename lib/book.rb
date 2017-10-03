@@ -19,4 +19,19 @@ class Book < Product
     @genre = params[:genre] if params[:genre]
   end
 
+  def self.from_file(file_name)
+    self.new(set_param(file_name))
+  end
+
+  def self.set_param(file_name)
+    array = File.readlines(file_name, 'r:UTF-8').map {|i| i.chomp}
+
+    hash = {
+      title: array[0],
+      genre: array[1],
+      author: array[2],
+      price: array[3].to_i,
+      amount: array[4].to_i}
+    hash
+  end
 end
