@@ -7,7 +7,19 @@ if (Gem.win_platform?)
   end
 end
 current_path = File.dirname(__FILE__)
-require_relative current_path + '/lib/product.rb'
-require_relative current_path +  '/lib/book.rb'
-require_relative current_path + '/lib/movie.rb'
 
+require_relative current_path + '/lib/product.rb'
+require_relative current_path + '/lib/book.rb'
+require_relative current_path + '/lib/film.rb'
+
+products = []
+
+movie = Film.new(price: 500, amount: 10, title: 'Леон', director: 'Люк Бессон', year: '1995')
+products << movie
+book = Book.new(price: 790, amount: 8, title: 'Идиот', author: 'Достоевский Ф.М.', genre: 'роман')
+products << book
+
+puts 'Вот такие товары у нас есть'
+products.each do |item|
+  puts item
+end
