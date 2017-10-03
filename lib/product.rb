@@ -9,4 +9,9 @@ class Product
     "Цена: #{price}руб. Осталось(#{amount})"
   end
 
+  def update(params)
+    @price = params[:price] if params[:price]
+    @amount = params[:amount] if params[:amount]
+  end
+
 end
