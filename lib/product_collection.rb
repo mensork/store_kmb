@@ -1,14 +1,16 @@
 class ProductCollection
   attr_reader :film_files
-  def initialize(film_files, book_files)
+  def initialize(film_files, book_files, cd_files)
     @film_files = film_files
     @book_files = book_files
+    @cd_files = cd_files
   end
 
   def self.from_dir(dir)
     film_files = Dir.glob("#{dir}/films/*.txt")
     book_files = Dir.glob("#{dir}/books/*.txt")
-    self.new(film_files, book_files)
+    cd_files = Dir.glob("#{dir}/cd/*.txt")
+    self.new(film_files, book_files, cd_files)
   end
 
   def to_a
@@ -18,6 +20,9 @@ class ProductCollection
     end
     @book_files.each do |file_name|
       products << Book.from_file(file_name)
+    end
+    @cd_files.each do |file_name|
+      products << CD.from_file(file_name)
     end
     products
   end

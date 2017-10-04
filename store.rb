@@ -11,11 +11,12 @@ current_path = File.dirname(__FILE__)
 require_relative current_path + '/lib/product.rb'
 require_relative current_path + '/lib/book.rb'
 require_relative current_path + '/lib/film.rb'
+require_relative current_path + '/lib/cd.rb'
 require_relative current_path + '/lib/product_collection.rb'
 
 collection = ProductCollection.from_dir('data')
 
-
+puts collection.sort_by_price
 
 
 # choice = nil
