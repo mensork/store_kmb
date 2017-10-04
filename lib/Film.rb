@@ -1,5 +1,5 @@
 class Film < Product
-  attr_accessor :title, :director, :year
+  attr_accessor :title, :director, :year, :price, :amount
 
   def initialize(params)
     super
@@ -29,7 +29,7 @@ class Film < Product
     hash = {
       title: array[0],
       director: array[1],
-      year: array[2],
+      year: array[2].to_i,
       price: array[3].to_i,
       amount: array[4].to_i}
     hash
