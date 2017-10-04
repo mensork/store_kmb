@@ -1,5 +1,6 @@
 class ProductCollection
-  attr_reader :film_files
+  attr_reader :film_files, :products
+
   def initialize(film_files, book_files, cd_files)
     @film_files = film_files
     @book_files = book_files
@@ -14,55 +15,55 @@ class ProductCollection
   end
 
   def to_a
-    products = []
+    @products = []
     @film_files.each do |file_name|
-      products << Film.from_file(file_name)
+      @products << Film.from_file(file_name)
     end
     @book_files.each do |file_name|
-      products << Book.from_file(file_name)
+      @products << Book.from_file(file_name)
     end
     @cd_files.each do |file_name|
-      products << CD.from_file(file_name)
+      @products << CD.from_file(file_name)
     end
-    products
+    @products
   end
 
   def show_list
-    to_a.each { |i| puts i }
+    products.each_with_index { |item, index| puts "#{index + 1}. #{item}" }
   end
 
   def sort_by_price
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       x.price <=> y.price
     end
   end
 
   def sort_by_price_in_reverse
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       y.price <=> x.price
     end
   end
 
   def sort_by_amount
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       x.amount <=> y.amount
     end
   end
 
   def sort_by_amount_in_reverse
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       y.amount <=> x.amount
     end
   end
 
   def sort_by_title
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       x.title <=> y.title
     end
   end
 
   def sort_by_title_in_reverse
-    to_a.sort do |x, y|
+    to_a.sort! do |x, y|
       y.title <=> x.title
     end
   end

@@ -24,7 +24,7 @@ class Book < Product
   end
 
   def self.set_param(file_name)
-    array = File.readlines(file_name, encoding: 'UTF-8').map {|i| i.chomp}
+    array = File.readlines(file_name, encoding: 'UTF-8').map { |i| i.chomp }
 
     hash = {
       title: array[0],
@@ -33,5 +33,9 @@ class Book < Product
       price: array[3].to_i,
       amount: array[4].to_i}
     hash
+  end
+
+  def buy
+    super
   end
 end

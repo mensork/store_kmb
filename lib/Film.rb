@@ -34,4 +34,8 @@ class Film < Product
       amount: array[4].to_i}
     hash
   end
+
+  def buy
+    super
+  end
 end
