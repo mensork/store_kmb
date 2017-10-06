@@ -24,10 +24,11 @@ class Product
       puts 'Товар закончился!'
       0
     else
-      puts 'Товар в корзине!'
+      puts 'Товар добавлен в корзину!'
       self.amount -= 1
       price
     end
   end
+
 end
 

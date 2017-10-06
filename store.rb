@@ -6,20 +6,22 @@ if (Gem.win_platform?)
     io.set_encoding(Encoding.default_external, Encoding.default_internal)
   end
 end
-current_path = File.dirname(__FILE__)
 
-require_relative current_path + '/lib/product.rb'
-require_relative current_path + '/lib/book.rb'
-require_relative current_path + '/lib/film.rb'
-require_relative current_path + '/lib/cd.rb'
-require_relative current_path + '/lib/product_collection.rb'
+require_relative 'lib/product'
+require_relative 'lib/book'
+require_relative 'lib/film'
+require_relative 'lib/cd'
+require_relative 'lib/product_collection'
+require_relative 'lib/product_in_cart'
+require_relative 'lib/cart'
 
 total_value = 0
 
 collection = ProductCollection.from_dir('data')
 collection.to_a
-
-puts greetings = 'Добро пожаловать в наш магазин!'
+cart = Cart.new
+system "cls"
+puts 'Добро пожаловать в наш магазин!'
 
 choice = nil
 until choice == 'x' do
@@ -32,12 +34,17 @@ until choice == 'x' do
   if (1..collection.products.size).include?(choice.to_i)
     selected_product = collection.products[choice.to_i - 1]
     puts
-    puts "Вы выбрали #{selected_product}"
+    cart.add(selected_product)
     total_value += selected_product.buy
-    puts shopping_basket = "Всего товаров на сумму #{total_value} руб."
+    puts
+    puts 'В корзине:'
+    puts cart.shopping_basket
+    puts
+    puts "Всего товаров на сумму #{total_value} руб."
   end
 end
-
-puts valediction = "С Вас - #{total_value} руб. Спасибо за покупки!"
+puts 'Вы купили:'
+puts cart.shopping_basket
+puts "С Вас - #{total_value} руб. Спасибо за покупки!"
 
 
