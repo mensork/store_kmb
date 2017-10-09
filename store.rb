@@ -12,7 +12,6 @@ require_relative 'lib/book'
 require_relative 'lib/film'
 require_relative 'lib/cd'
 require_relative 'lib/product_collection'
-require_relative 'lib/product_in_cart'
 require_relative 'lib/cart'
 
 total_value = 0
@@ -20,31 +19,42 @@ total_value = 0
 collection = ProductCollection.from_dir('data')
 collection.to_a
 cart = Cart.new
-system "cls"
+system 'cls'
 puts 'Добро пожаловать в наш магазин!'
 
 choice = nil
-until choice == 'x' do
+until choice == 0 do
   puts
   puts 'Что хотите купить?'
   collection.show_list
-  puts 'x. Выход'
-  choice = STDIN.gets.chomp
+  puts '0. Выход'
+  choice = STDIN.gets.to_i
 
-  if (1..collection.products.size).include?(choice.to_i)
-    selected_product = collection.products[choice.to_i - 1]
+  if (1..collection.products.size).include?(choice)
+    selected_product = collection.products[choice - 1]
+
     puts
     cart.add(selected_product)
     total_value += selected_product.buy
+    puts 'Товар добавлен в корзину!'
+
+    collection.delete_product(selected_product) if selected_product.amount == 0 #взято у Александра Белышева
+    break if collection.empty? #взято у Александра Белышева
+
     puts
     puts 'В корзине:'
-    puts cart.shopping_basket
+    cart.print_content
+
     puts
     puts "Всего товаров на сумму #{total_value} руб."
+
+  else
+    puts 'Такого номера нет в списке'
   end
 end
+puts
 puts 'Вы купили:'
-puts cart.shopping_basket
+cart.print_content
 puts "С Вас - #{total_value} руб. Спасибо за покупки!"
 
 

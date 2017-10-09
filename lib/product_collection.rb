@@ -29,7 +29,17 @@ class ProductCollection
   end
 
   def show_list
-    products.each_with_index { |item, index| puts "#{index + 1}. #{item}" }
+    products.each_with_index do |product, index|
+      puts "#{index + 1}. #{product} Осталось(#{product.amount})"
+    end
+  end
+
+  def delete_product(product)
+    @products.delete(product)
+  end
+
+  def empty?
+    @products.empty?
   end
 
   def sort_by_price

@@ -7,7 +7,7 @@ class Product
   end
 
   def to_s
-    "Цена: #{price}руб. Осталось(#{amount})"
+    "Цена: #{price}руб."
   end
 
   def update(params)
@@ -20,15 +20,8 @@ class Product
   end
 
   def buy
-    if amount == 0
-      puts 'Товар закончился!'
-      0
-    else
-      puts 'Товар добавлен в корзину!'
-      self.amount -= 1
-      price
-    end
+    self.amount -= 1
+    price
   end
-
 end
 

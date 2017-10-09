@@ -6,20 +6,15 @@ class Cart
   end
 
   def add(product)
-    chosen_product = ProductInCart.new(product)
-    if product.amount == 0
-    elsif in_basket?(chosen_product) == true
-      @shopping_basket.each do |item|
-        item.amount += 1 if chosen_product.title == item.title
-      end
-    else
-      @shopping_basket << chosen_product
-    end
+    @shopping_basket << product
   end
 
-  def in_basket?(chosen_product)
-    @shopping_basket.each do |item|
-      return true if chosen_product.title == item.title
+  def print_content #взято у Александра Белышева
+    @shopping_basket.uniq.each do |product|
+      count = @shopping_basket.count(product)
+      sum_by_prod = count * product.price
+
+      puts "#{product}, Кол-во #{count}, Сумма #{sum_by_prod}руб."
     end
   end
 

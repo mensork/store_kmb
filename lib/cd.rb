@@ -10,7 +10,7 @@ class CD < Product
   end
 
   def to_s
-    "Альбом #{author} - '#{title}'(#{year}), #{genre}. #{super}"
+    "Альбом '#{title}'(#{year}) - #{author} , #{genre}. #{super}"
   end
 
   def update(params)
